@@ -1,0 +1,24 @@
+syntax = "proto3";
+package biz.user.user;
+option go_package = "github.com/byread/protos/biz-user/user;user";
+
+import "service-user/manage/manage.proto";
+
+service User {
+  rpc Query(UserQueryRequest) returns (UserQueryResponse) {}
+}
+
+message UserQueryRequest {
+  // @inject_tag: validate:"required" tips:"required=用户字段必须填写"
+  uint64 uid = 1;
+}
+
+message UserQueryResponse {
+  int32 code = 1;
+  string message = 2;
+  UserQueryResponseData data = 3;
+}
+
+message UserQueryResponseData {
+  service.user.manage.UserQueryResponseData userInfo = 1;
+}

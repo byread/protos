@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package service.user.manage;
+
+option go_package = "github.com/byread/protos/service-user/manage;manage";
+
+service Manage {
+  rpc Query(UserQueryRequest) returns (UserQueryResponse) {}
+}
+
+message UserQueryRequest {
+  // @inject_tag: validate:"required" tips:"required=用户字段必须填写"
+  uint64 uid = 1;
+}
+
+message UserQueryResponse {
+  int32 code = 1;
+  string message = 2;
+  UserQueryResponseData data = 3;
+}
+
+message UserQueryResponseData {
+  uint64 uid = 2;
+  string username = 3;
+  string nickname = 4;
+  string phone = 5;
+  string email = 6;
+}
